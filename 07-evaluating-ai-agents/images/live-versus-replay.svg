@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="350" viewBox="0 0 760 350" role="img" aria-labelledby="title desc">
+  <title id="title">Live and replay tools behind one interface</title>
+  <desc id="desc">The unchanged agent calls one tool interface while the caller selects either live production systems or recorded replay data</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker>
+    <style>
+      .name { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#12222F; }
+      .zone { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#5B6B78; letter-spacing:1.5px; }
+      .detail { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:400; fill:#5B6B78; }
+      .c { font-family:SFMono-Regular,Menlo,Consolas,monospace; font-weight:400; fill:#12222F; }
+    </style>
+  </defs>
+  <rect width="760" height="350" fill="#FFFFFF"/>
+  <text x="380" y="34" text-anchor="middle" class="name" font-size="23">Swap the source while keeping the agent</text>
+  <rect x="520" y="68" width="220" height="216" rx="14" fill="#F2F5F8"/>
+  <text x="630" y="89" text-anchor="middle" class="zone" font-size="12">DATA SOURCE</text>
+
+  <rect x="25" y="131" width="180" height="90" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="275" y="116" width="180" height="120" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <rect x="545" y="101" width="170" height="72" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="545" y="195" width="170" height="72" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <path d="M207,176 H270" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M457,148 H500 V137 H540" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M457,204 H500 V231 H540" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+
+  <text x="115" y="167" text-anchor="middle" class="name" font-size="20">Agent</text>
+  <text x="115" y="193" text-anchor="middle" class="detail" font-size="13">Unchanged code</text>
+  <text x="365" y="151" text-anchor="middle" class="name" font-size="19">Tool interface</text>
+  <text x="365" y="179" text-anchor="middle" class="c" font-size="13">get_logs(service)</text>
+  <text x="365" y="205" text-anchor="middle" class="detail" font-size="13">Same call and same shape</text>
+  <text x="630" y="132" text-anchor="middle" class="name" font-size="18">Live tools</text>
+  <text x="630" y="153" text-anchor="middle" class="detail" font-size="12">Production systems</text>
+  <text x="630" y="226" text-anchor="middle" class="name" font-size="18">Replay tools</text>
+  <text x="630" y="247" text-anchor="middle" class="detail" font-size="12">Recorded responses</text>
+  <text x="380" y="323" text-anchor="middle" class="detail" font-size="14">The caller chooses the source</text>
+</svg>

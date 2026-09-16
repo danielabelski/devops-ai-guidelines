@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="390" viewBox="0 0 760 390" role="img" aria-labelledby="title desc">
+  <title id="title">Unsafe and safe answer key isolation</title>
+  <desc id="desc">The unsafe design passes the full scenario and relies on later removal, while the safe design loads only the situation into a narrow agent input</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker>
+    <style>
+      .name { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#12222F; }
+      .zone { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#5B6B78; letter-spacing:1.5px; }
+      .detail { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:400; fill:#5B6B78; }
+    </style>
+  </defs>
+  <rect width="760" height="390" fill="#FFFFFF"/>
+  <text x="380" y="34" text-anchor="middle" class="name" font-size="23">Make leakage impossible by construction</text>
+  <rect x="20" y="58" width="720" height="127" rx="14" fill="#F2F5F8"/>
+  <rect x="20" y="215" width="720" height="127" rx="14" fill="#F2F5F8"/>
+  <text x="42" y="82" class="zone" font-size="12">UNSAFE: REMOVE LATER</text>
+  <text x="42" y="239" class="zone" font-size="12">SAFE: LOAD ONLY WHAT IS ALLOWED</text>
+
+  <rect x="45" y="103" width="170" height="58" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <rect x="295" y="103" width="170" height="58" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="545" y="103" width="170" height="58" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="45" y="260" width="170" height="58" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="295" y="260" width="170" height="58" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <rect x="545" y="260" width="170" height="58" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <path d="M217,132 H290" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M467,132 H540" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M217,289 H290" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M467,289 H540" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+
+  <text x="130" y="127" text-anchor="middle" class="name" font-size="16">Full scenario</text>
+  <text x="130" y="147" text-anchor="middle" class="detail" font-size="12">Situation and answer key</text>
+  <text x="380" y="127" text-anchor="middle" class="name" font-size="16">Remove fields</text>
+  <text x="380" y="147" text-anchor="middle" class="detail" font-size="12">Rule to remember</text>
+  <text x="630" y="138" text-anchor="middle" class="name" font-size="17">Agent</text>
+  <text x="130" y="284" text-anchor="middle" class="name" font-size="16">Situation loader</text>
+  <text x="130" y="304" text-anchor="middle" class="detail" font-size="12">Reads allowed fields</text>
+  <text x="380" y="284" text-anchor="middle" class="name" font-size="16">Agent input</text>
+  <text x="380" y="304" text-anchor="middle" class="detail" font-size="12">No answer field</text>
+  <text x="630" y="295" text-anchor="middle" class="name" font-size="17">Agent</text>
+  <text x="380" y="373" text-anchor="middle" class="detail" font-size="14">A narrow input turns policy into a boundary</text>
+</svg>

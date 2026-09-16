@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="350" viewBox="0 0 760 350" role="img" aria-labelledby="title desc">
+  <title id="title">The answer key takes a separate route</title>
+  <desc id="desc">The situation flows through replay tools to the agent, while the answer key bypasses the agent and meets its conclusion only at the grader</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker>
+    <style>
+      .name { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#12222F; }
+      .zone { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#5B6B78; letter-spacing:1.5px; }
+      .detail { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:400; fill:#5B6B78; }
+    </style>
+  </defs>
+  <rect width="760" height="350" fill="#FFFFFF"/>
+  <text x="380" y="34" text-anchor="middle" class="name" font-size="23">The answer takes a different route</text>
+  <rect x="20" y="72" width="160" height="215" rx="14" fill="#F2F5F8"/>
+  <text x="100" y="94" text-anchor="middle" class="zone" font-size="11">SCENARIO FILE</text>
+
+  <rect x="40" y="112" width="120" height="58" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <rect x="40" y="211" width="120" height="58" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="240" y="101" width="155" height="80" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="455" y="101" width="135" height="80" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="625" y="153" width="115" height="90" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <path d="M162,141 H235" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M397,141 H450" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M592,141 H610 V180 H620" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M162,240 H580 V216 H620" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+
+  <text x="100" y="147" text-anchor="middle" class="name" font-size="16">Situation</text>
+  <text x="100" y="246" text-anchor="middle" class="name" font-size="16">Answer key</text>
+  <text x="317" y="135" text-anchor="middle" class="name" font-size="18">Replay tools</text>
+  <text x="317" y="158" text-anchor="middle" class="detail" font-size="12">Situation only</text>
+  <text x="522" y="149" text-anchor="middle" class="name" font-size="19">Agent</text>
+  <text x="682" y="193" text-anchor="middle" class="name" font-size="18">Grader</text>
+  <text x="682" y="216" text-anchor="middle" class="detail" font-size="12">Compares</text>
+  <text x="380" y="325" text-anchor="middle" class="detail" font-size="14">Situation and answer meet only after the agent commits</text>
+</svg>

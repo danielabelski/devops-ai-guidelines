@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-labelledby="title desc">
+  <title id="title">Live and replay responses share one contract</title>
+  <desc id="desc">Live and recorded responses must match in arguments, fields, types, nesting, and failure behavior before reaching the agent</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker>
+    <style>
+      .name { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#12222F; }
+      .detail { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:400; fill:#5B6B78; }
+    </style>
+  </defs>
+  <rect width="760" height="320" fill="#FFFFFF"/>
+  <text x="380" y="34" text-anchor="middle" class="name" font-size="23">Facts alone are not enough</text>
+
+  <rect x="25" y="76" width="175" height="80" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="25" y="185" width="175" height="80" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="285" y="86" width="220" height="170" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <rect x="585" y="126" width="150" height="90" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <path d="M202,116 H245 V137 H280" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M202,225 H245 V205 H280" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M507,171 H580" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+
+  <text x="112" y="108" text-anchor="middle" class="name" font-size="18">Live response</text>
+  <text x="112" y="132" text-anchor="middle" class="detail" font-size="12">From production</text>
+  <text x="112" y="217" text-anchor="middle" class="name" font-size="18">Replay response</text>
+  <text x="112" y="241" text-anchor="middle" class="detail" font-size="12">From the scenario</text>
+  <text x="395" y="119" text-anchor="middle" class="name" font-size="19">Same contract</text>
+  <text x="315" y="151" class="detail" font-size="13">Arguments</text>
+  <text x="315" y="177" class="detail" font-size="13">Field names and types</text>
+  <text x="315" y="203" class="detail" font-size="13">Nested structure</text>
+  <text x="315" y="229" class="detail" font-size="13">Failure behavior</text>
+  <text x="660" y="163" text-anchor="middle" class="name" font-size="20">Agent</text>
+  <text x="660" y="188" text-anchor="middle" class="detail" font-size="12">Source stays hidden</text>
+</svg>

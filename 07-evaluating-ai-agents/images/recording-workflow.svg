@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="285" viewBox="0 0 760 285" role="img" aria-labelledby="title desc">
+  <title id="title">From solved incident to reusable scenario</title>
+  <desc id="desc">A solved incident passes through human review and sanitization before becoming a fixed scenario with a situation and answer key</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker>
+    <style>
+      .name { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#12222F; }
+      .detail { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:400; fill:#5B6B78; }
+    </style>
+  </defs>
+  <rect width="760" height="285" fill="#FFFFFF"/>
+  <text x="380" y="34" text-anchor="middle" class="name" font-size="23">A passing event becomes a reusable test</text>
+
+  <rect x="25" y="82" width="195" height="108" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="280" y="82" width="200" height="108" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <rect x="540" y="82" width="195" height="108" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <path d="M222,136 H275" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <path d="M482,136 H535" stroke="#000000" stroke-width="3" fill="none" marker-end="url(#a)"/>
+
+  <text x="122" y="119" text-anchor="middle" class="name" font-size="19">Solved incident</text>
+  <text x="122" y="145" text-anchor="middle" class="detail" font-size="13">Telemetry and true cause</text>
+  <text x="380" y="112" text-anchor="middle" class="name" font-size="19">Review</text>
+  <text x="380" y="139" text-anchor="middle" class="detail" font-size="13">Mark proof and distraction</text>
+  <text x="380" y="161" text-anchor="middle" class="detail" font-size="13">Remove sensitive data</text>
+  <text x="637" y="119" text-anchor="middle" class="name" font-size="19">Scenario file</text>
+  <text x="637" y="145" text-anchor="middle" class="detail" font-size="13">Situation and answer key</text>
+  <text x="380" y="247" text-anchor="middle" class="detail" font-size="14">Production changes while the reviewed scenario stays fixed</text>
+</svg>

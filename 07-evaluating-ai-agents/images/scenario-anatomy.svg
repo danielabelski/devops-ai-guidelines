@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" role="img" aria-labelledby="title desc">
+  <title id="title">One scenario with two readers</title>
+  <desc id="desc">A recorded scenario keeps the situation for the agent separate from the answer key for the grader</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000000"/>
+    </marker>
+    <style>
+      .name { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#12222F; }
+      .zone { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#5B6B78; letter-spacing:1.5px; }
+      .detail { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:400; fill:#5B6B78; }
+    </style>
+  </defs>
+
+  <rect width="760" height="330" fill="#FFFFFF"/>
+  <text x="380" y="34" text-anchor="middle" class="name" font-size="23">One scenario with two readers</text>
+
+  <rect x="20" y="58" width="720" height="190" rx="14" fill="#F2F5F8"/>
+  <text x="380" y="79" text-anchor="middle" class="zone" font-size="12">RECORDED SCENARIO</text>
+  <line x1="380" y1="88" x2="380" y2="232" stroke="#9AA9B6" stroke-width="2" stroke-dasharray="7 7"/>
+
+  <rect x="42" y="96" width="310" height="118" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <text x="62" y="127" class="name" font-size="20">Situation</text>
+  <text x="62" y="153" class="detail" font-size="13">Alert and recorded tool responses</text>
+  <text x="62" y="177" class="detail" font-size="13">Misleading signals included</text>
+
+  <rect x="408" y="96" width="310" height="118" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <text x="428" y="127" class="name" font-size="20">Answer key</text>
+  <text x="428" y="153" class="detail" font-size="13">True cause and required evidence</text>
+  <text x="428" y="177" class="detail" font-size="13">Distraction and step budget</text>
+
+  <path d="M197,216 V267" stroke="#000000" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <path d="M563,216 V267" stroke="#000000" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <rect x="127" y="272" width="140" height="42" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <rect x="493" y="272" width="140" height="42" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <text x="197" y="298" text-anchor="middle" class="name" font-size="16">Agent</text>
+  <text x="563" y="298" text-anchor="middle" class="name" font-size="16">Grader</text>
+</svg>
