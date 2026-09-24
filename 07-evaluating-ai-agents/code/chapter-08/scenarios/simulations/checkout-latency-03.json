@@ -1,0 +1,7 @@
+{
+  "id": "checkout-latency-03",
+  "case": "pool",
+  "change": "Add: name every signal you ruled out",
+  "instructions": "Find out why checkout is slow. Call submit_diagnosis when you are done. Copy cause_change exactly as it appears in the tool output. In rejected_signals, list every signal you checked and ruled out, named in snake_case after the system it came from.",
+  "max_steps": 5
+}

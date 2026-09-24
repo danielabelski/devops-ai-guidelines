@@ -1,5 +1,15 @@
 {
   "id": "checkout-latency-after-pool-change",
+  "validity": {
+    "owner": "checkout on-call",
+    "recorded_at": "2026-09-12",
+    "review_by": "2026-12-12",
+    "assumptions": {
+      "topology": "checkout-db-pool-v1",
+      "runbook": "checkout-latency-v2",
+      "tool_contract": "incident-tools-v1"
+    }
+  },
   "situation": {
     "alert": {
       "service": "checkout-service",
@@ -54,6 +64,6 @@
     "true_cause": "The 14:02 deploy reduced DB_MAX_CONNECTIONS from 50 to 5, exhausting the connection pool.",
     "required_evidence": ["get_deploys", "get_db_status"],
     "distraction": "payment-provider latency increased at 14:06",
-    "max_steps": 4
+    "max_steps": 5
   }
 }

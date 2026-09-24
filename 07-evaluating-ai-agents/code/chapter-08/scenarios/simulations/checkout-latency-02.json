@@ -1,0 +1,7 @@
+{
+  "id": "checkout-latency-02",
+  "case": "pool",
+  "change": "Add: copy the exact change from the tool output",
+  "instructions": "Find out why checkout is slow. Call submit_diagnosis when you are done. Copy cause_change exactly as it appears in the tool output.",
+  "max_steps": 5
+}

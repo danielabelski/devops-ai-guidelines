@@ -1,7 +1,7 @@
 """grade_once.py — run agents against the same incident and grade each one.
 
 The lucky agent passing is the point, not an oversight: a category-only grade
-can't tell a real diagnosis from a guess. Chapter 6 fixes that.
+can't tell a real diagnosis from a guess. Chapter 7 fixes that.
 """
 
 from agent import Agent

@@ -133,11 +133,12 @@ production — which changes every second and never gives you the same incident
 twice — you capture one incident once, with its answer, and hand the agent a frozen
 copy of the scene. A recorded case is worth building on because it is:
 
-- **Deterministic** — the same inputs every run, so a score change means the *agent*
-  changed, not the world.
+- **Fixed inputs** — the same recorded environment every run. A sampled model can
+  still vary; compare the same valid cases with the same scoring rules.
 - **Repeatable** — run it a thousand times, before and after every code change, for
-  free.
-- **Cheap** — no real outage, no waiting for prod to break in an interesting way.
+  comparison without waiting for another outage.
+- **Cheap to replay** — no real outage or live tool queries, though model calls may
+  still cost money.
 - **Safe** — the agent investigates a recording, so it can't touch anything real
   while you're grading it.
 
@@ -145,6 +146,11 @@ This is the same idea behind a held-out test set in machine learning, or a
 golden-file test in ordinary code: freeze a known-good case, replay it, compare.
 What's new is applying it to something that *acts* — and grading not just the answer
 but the path it took to get there.
+
+Freezing a case does not freeze your production system. If its topology, runbook, or
+tool contract changes, the case can keep passing while testing an old world. We will
+record those assumptions, reject expired cases before replay, and report suite
+health separately from the agent's score. A stale green is not an improvement.
 
 ### What a good score measures
 
@@ -161,7 +167,7 @@ check:
   until it ran out of budget?
 
 Those four turn a vague "seems better" into things you can pass or fail. We'll make
-each one concrete in Chapter 6.
+each one concrete in Chapter 7.
 
 ### The DevOps incident we'll use the whole way through
 
@@ -194,17 +200,17 @@ Python, no framework — that does the whole loop:
 - A **tiny incident-diagnosis agent** with four read-only tools, so you have a real
   agent to measure (Chapter 1).
 - A **recorded scenario** format: the incident the agent sees, plus a hidden answer
-  key it doesn't (Chapters 3–5).
+  key it doesn't and validity assumptions the runner checks (Chapters 4–6).
 - A **replay** mechanism that feeds the agent recorded data of the same shape its
-  live tools return (Chapter 4).
-- **Deterministic gates** — right category, required evidence cited, distraction
-  rejected, step budget respected — that pass or fail with no argument (Chapter 6).
-- An **LLM judge** for the judgment calls the gates can't check, kept firmly as a second
-  opinion (Chapter 7).
+  live tools return (Chapter 5).
+- **Deterministic gates** — structured cause, real and cited evidence, a seen and
+  rejected distraction, and a step budget (Chapter 7).
+- A **required Jev judge** for explanation quality and unsupported claims; it cannot
+  rescue a failed hard gate, and an unavailable judge never produces a pass (Chapter 8).
 - A **benchmark**: many scenarios rolled into one score you track over time
-  (Chapter 8).
+  with active, expired, and historical cases reported separately (Chapter 9).
 - A **closed loop** that turns every production miss into a new recorded case, and a
-  **CI gate** that blocks any change which drops the score (Chapters 9–10).
+  **CI gate** that blocks any change which drops the score (Chapters 10–11).
 
 Start to finish, it answers the Tuesday question: *my agent scored 8 out of 10 last
 week; my change took it to 9; here's the case it now gets right that it used to

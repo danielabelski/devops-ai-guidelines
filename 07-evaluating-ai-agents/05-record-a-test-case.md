@@ -30,6 +30,10 @@ engineer sees alerts, logs, metrics, and recent changes. After the fix, the team
 which signal was proof and which one only looked suspicious. A useful test case keeps
 both views.
 
+There is a third part, outside both views: *validity metadata*. It says when and for
+which version of the system this case still applies. The agent does not need it, but
+the runner must check it before replay.
+
 ### Step 1: choose a solved case
 
 Start with an incident that has a confirmed cause. "We think it was the database"
@@ -50,6 +54,32 @@ good distraction because it is believable but contradicted by the order of event
 
 > **Warning:** Don't create answer keys from unresolved incidents. A disputed answer
 > turns the benchmark into a test of one author's opinion.
+
+### Record what makes this case valid
+
+A frozen incident can become a bad test without its file changing. If checkout stops
+using this database pool, the old case may still pass while testing a system that no
+longer exists. Record assumptions that someone can check against the *current*
+system, not just a date:
+
+```json
+"validity": {
+  "owner": "checkout on-call",
+  "recorded_at": "2026-09-12",
+  "review_by": "2026-12-12",
+  "assumptions": {
+    "topology": "checkout-db-pool-v1",
+    "runbook": "checkout-latency-v2",
+    "tool_contract": "incident-tools-v1"
+  }
+}
+```
+
+The owner reviews the case by `review_by`, even when no known dependency has changed.
+The three named versions are examples, not facts the recording can verify on its own.
+Chapter 5 compares them with a manifest supplied from outside the case. If a version
+differs, the case expires before it can return a green score. Keep historical cases
+for old systems if useful, but do not count them as current coverage.
 
 ### Step 2: record the situation
 
@@ -87,6 +117,7 @@ Record enough context to make the case understandable on its own:
 - Save one response per tool that the agent may call.
 - Keep misleading signals. Removing them makes the test easier than the real job.
 - Remove secrets and personal data before the file enters source control.
+- Record an owner and the system assumptions whose change would invalidate the case.
 
 ### Step 3: write the answer key
 
@@ -98,7 +129,7 @@ The second half records the truth and the rules for this one case:
   "true_cause": "The 14:02 deploy reduced DB_MAX_CONNECTIONS from 50 to 5, exhausting the connection pool.",
   "required_evidence": ["get_deploys", "get_db_status"],
   "distraction": "payment-provider latency increased at 14:06",
-  "max_steps": 4
+  "max_steps": 5
 }
 ```
 
@@ -116,9 +147,10 @@ The answer key should describe one acceptable result, not prescribe every senten
 the agent must write. We compare the structured category exactly in Chapter 7. We
 leave judgment about the prose to Chapter 8.
 
-The step budget also belongs to the case, not to the agent. A simple incident may
-need three or four actions; a broad dependency failure may need more. One global
-budget would make easy cases too loose and hard cases impossible.
+The step budget also belongs to the case, not to the agent. This case needs five
+actions to inspect metrics, logs, deploys, and pool status before concluding. A broad
+dependency failure may need more. One global budget would make easy cases too loose
+and hard cases impossible.
 
 ### Step 4: see how recording works
 
@@ -133,7 +165,7 @@ answer key together.
 
 A recorder could automate collection later. Keep the review step even then. A tool
 can collect logs; it cannot decide by itself that the payment-provider line is the
-right distraction or that four steps is a fair budget.
+right distraction or that five steps is a fair budget.
 
 ### Step 5: load and validate the file
 
@@ -156,16 +188,26 @@ class AnswerKey:
 
 
 @dataclass(frozen=True)
+class Validity:
+  owner: str
+  recorded_at: str
+  review_by: str
+  assumptions: Dict[str, str]
+
+
+@dataclass(frozen=True)
 class Scenario:
     id: str
+  validity: Validity
     situation: Situation
     answer_key: AnswerKey
 ```
 
-`frozen=True` stops code from changing a loaded record by accident. The loader also
-checks required fields and rejects a step budget below one. This is intentionally
-small validation. It catches broken records without hiding the format behind a large
-framework.
+`Validity` holds the owner, dates, and assumptions shown above. `frozen=True` stops
+code from replacing a loaded record field by accident; nested dictionaries can still
+be changed, so replay returns copies. The loader also checks required fields and
+rejects a step budget below one. This small validation catches broken records without
+hiding the format behind a large framework; it does not prove the case is still current.
 
 Run the check from the chapter folder:
 
@@ -176,15 +218,17 @@ python check_scenario.py
 
 ```text
 Scenario:          checkout-latency-after-pool-change
+Review by:         2026-12-12
+Assumptions:       topology, runbook, tool_contract
 Alert:             checkout-service p95 latency > 2s
 Recorded tools:    get_metrics, get_logs, get_deploys, get_db_status
 True category:     deploy
 Required evidence: get_deploys, get_db_status
-Step budget:       4
+Step budget:       5
 ```
 
-That output is an inventory, not a score. It proves that the case has the inputs and
-known answer that later chapters need.
+That output is an inventory, not a score or a live validity check. It shows the
+inputs, known answer, and assumptions that later chapters need.
 
 ### A failure worth catching early
 
@@ -218,5 +262,6 @@ The schema stays the same when the job changes. Only the values differ.
 - Keep realistic distractions; don't clean the case until it becomes trivial.
 - Write the answer key only after the cause is confirmed and reviewed.
 - Validate every scenario before it enters the benchmark.
+- Record the system assumptions and review date that determine when it expires.
 
 Next: turn the recorded responses into tools the unchanged agent can call.

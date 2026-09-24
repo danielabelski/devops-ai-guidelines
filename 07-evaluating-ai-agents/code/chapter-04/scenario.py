@@ -22,8 +22,17 @@ class AnswerKey:
 
 
 @dataclass(frozen=True)
+class Validity:
+    owner: str
+    recorded_at: str
+    review_by: str
+    assumptions: Dict[str, str]
+
+
+@dataclass(frozen=True)
 class Scenario:
     id: str
+    validity: Validity
     situation: Situation
     answer_key: AnswerKey
 
@@ -38,7 +47,10 @@ def _require_keys(value: Dict[str, Any], keys: set, location: str) -> None:
 def load_scenario(path: Path) -> Scenario:
     """Read a scenario file and reject incomplete records."""
     raw = json.loads(path.read_text(encoding="utf-8"))
-    _require_keys(raw, {"id", "situation", "answer_key"}, "scenario")
+    _require_keys(raw, {"id", "validity", "situation", "answer_key"}, "scenario")
+    _require_keys(raw["validity"], {"owner", "recorded_at", "review_by", "assumptions"}, "validity")
+    if not raw["validity"]["assumptions"]:
+        raise ValueError("validity.assumptions must not be empty")
     _require_keys(raw["situation"], {"alert", "tool_responses"}, "situation")
     _require_keys(
         raw["answer_key"],
@@ -57,6 +69,7 @@ def load_scenario(path: Path) -> Scenario:
 
     return Scenario(
         id=raw["id"],
+        validity=Validity(**raw["validity"]),
         situation=Situation(**raw["situation"]),
         answer_key=AnswerKey(**raw["answer_key"]),
     )

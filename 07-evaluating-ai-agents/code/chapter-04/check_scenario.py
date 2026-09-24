@@ -8,6 +8,8 @@ from scenario import load_scenario
 scenario = load_scenario(Path("scenarios/checkout-latency.json"))
 
 print(f"Scenario:          {scenario.id}")
+print(f"Review by:         {scenario.validity.review_by}")
+print(f"Assumptions:       {', '.join(scenario.validity.assumptions)}")
 print(f"Alert:             {scenario.situation.alert['message']}")
 print(f"Recorded tools:    {', '.join(scenario.situation.tool_responses)}")
 print(f"True category:     {scenario.answer_key.true_category}")

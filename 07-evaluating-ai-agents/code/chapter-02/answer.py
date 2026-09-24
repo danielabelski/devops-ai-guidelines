@@ -1,6 +1,6 @@
 """answer.py — the answer key for the checkout-service incident.
 
-Deliberately the smallest possible version: just the true category. Chapter 3
+Deliberately the smallest possible version: just the true category. Chapter 4
 grows this into a full recorded scenario with required evidence, a distraction
 to reject, and a step budget. For now it only has to answer one question: did
 the agent land on the right category?

@@ -15,8 +15,8 @@ and gives us no way to know if it's right.**
 
 ### Get the code
 
-Everything in this book is in one repository, with a folder per chapter — so you
-can always run a chapter's code exactly as it stood at the end of that chapter.
+Everything in this book is in one repository, with a folder for each runnable
+chapter — so you can run its code exactly as it stood at the end of that chapter.
 Clone it and start in the Chapter 1 folder:
 
 ```bash
@@ -49,8 +49,9 @@ We'll build it in three parts:
 
 Our agent gets four read-only tools. Each returns recorded data for one incident:
 the checkout-service latency spike from the introduction. Read-only matters — an
-agent you're grading should look but never touch, so a bad run can't break
-anything.
+agent you're grading should not change production state. Reads can still expose
+secrets, overload a backend, or carry hostile content, so these local recordings
+are not a substitute for production safety checks.
 
 ```python
 def get_metrics(service):
@@ -216,16 +217,16 @@ You can't say. And it's worth being precise about *why*, because each reason map
 a part of the harness we're about to build:
 
 - **Nothing was compared to a known answer.** The agent asserted a root cause. There
-  was no truth on the other side of the equals sign. *(Chapters 2–3: record the
-  answer.)*
+  was no truth on the other side of the equals sign. *(Chapters 2 and 4: write down
+  and record the answer.)*
 - **The confident tone is worthless as evidence.** It would read exactly this
-  self-assured if it had blamed the payment provider instead. *(Chapter 6: score the
-  answer, not the prose.)*
+  self-assured if it had blamed the payment provider instead. *(Chapters 7–8: score
+  facts first, then use a judge for the prose.)*
 - **We never checked whether it earned the answer.** It cited `get_deploys` and
-  `get_db_status` this time — but nothing in the run *required* that. *(Chapter 6:
+  `get_db_status` this time — but nothing in the run *required* that. *(Chapter 7:
   grade the evidence and the trajectory, not just the conclusion.)*
 - **We can't repeat it against tomorrow's version.** Change the model next week and
-  this run is gone; there's nothing to compare against. *(Chapters 4 and 8: replay
+  this run is gone; there's nothing to compare against. *(Chapters 4–5 and 9: record, replay,
   and benchmark.)*
 
 That's the whole motivation for the book, sitting in one screen of output: a fluent

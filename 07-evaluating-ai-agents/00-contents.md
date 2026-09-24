@@ -43,36 +43,38 @@ chapter builds each. Read this and every chapter after it has an obvious place t
 **4. [Record a Test Case Your Agent Will Face](#4-record-a-test-case-your-agent-will-face)**
 Freeze one case into a scenario file: the situation the agent is dropped into, and a
 separate answer key holding the true cause, the evidence that proves it, the planted
-distraction, and the step budget.
+distraction, and the step budget. Record its owner, review date, and assumptions too.
 
 **5. [Replay That Case to Your Agent](#5-replay-that-case-to-your-agent)**
 Swap the agent's live data sources for recorded ones of the exact same shape. The
-agent investigates a frozen scene and can't tell the difference — which is what makes
-a score mean something.
+agent investigates a frozen scene after a validity check rejects cases that no
+longer represent the current system.
 
 **6. [Keep the Answer Away from the Agent](#6-keep-the-answer-away-from-the-agent)**
 Enforce the wall between the two parts of a scenario instead of trusting yourself to
 respect it. Why this anti-cheat is the most important rule in the design.
 
 **7. [Score It with Hard Gates](#7-score-it-with-hard-gates)**
-The deterministic checks and why each exists: right category, cited the evidence that
-proves it, rejected the distraction, stayed inside the step budget. No opinions, no
-arguing.
+Check the cause with a structured answer, confirm the required tools were actually
+called, check what happened with the distraction, and enforce the step budget. Keep
+"never saw it" distinct from "saw it and rejected it."
 
-**8. [Add an LLM Judge for the Judgment Calls](#8-add-an-llm-judge-for-the-judgment-calls)**
-Grade what rules can't express, using a language model and a plain-language rubric —
-kept firmly as a second opinion that never decides pass or fail.
+**8. [Judge the Explanation with Jev](#8-judge-the-explanation-with-jev)**
+Run a real OpenAI agent, then require TypeSafe's Jev model through Cloudflare to
+judge what the hard gates cannot read in its explanation. Neither check can turn a
+failure in the other green. Ten simulations change one agent setting at a time to
+show how both grades guide a better agent.
 
 **9. [Turn Scores into a Benchmark](#9-turn-scores-into-a-benchmark)**
-Run many scenarios and roll the results into one number you track over time, so you
-can prove an improvement and catch a regression.
+Score only active cases, report expired and historical cases separately, and compare
+the same pinned set before claiming the agent improved.
 
 **10. [Close the Loop: Every Miss Becomes a Test](#10-close-the-loop-every-miss-becomes-a-test)**
-Turn a real production failure into a new recorded scenario. The benchmark grows
-along your agent's actual weaknesses instead of your guesses.
+Turn a real miss into a reviewed scenario with an owner and assumptions; replace or
+retire cases when topology, runbooks, or tool contracts change.
 
 **11. [Gate Your Agent in CI](#11-gate-your-agent-in-ci)**
-Run the benchmark as a merge gate, point the whole harness at your own agent, and
-operate it honestly. What it catches, and what it never will.
+Gate both agent quality on valid cases and suite health: stale cases, missing current
+coverage, and unreviewed exclusions must not produce a green build.
 
 **[Additional Resources](#additional-resources)**

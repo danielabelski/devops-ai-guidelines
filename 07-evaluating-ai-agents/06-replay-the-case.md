@@ -29,6 +29,28 @@ If replay requires evaluation-only branches inside the agent, you are no longer
 testing the production behavior. You are testing a special version that may act
 differently.
 
+Frozen inputs make a run repeatable, not necessarily relevant. Before the swap, we
+must check that the case still describes the system we want to measure.
+
+### Check validity before replay
+
+The caller supplies a *current-system manifest* independently of the recorded case.
+For this local example it is a dictionary in `run_replay.py`; in a real benchmark it
+must come from the deployed system or a maintained inventory, not be copied from the
+case itself. Compare each assumption and its review date before starting the agent:
+
+```python
+scenario = load_scenario(Path("scenarios/checkout-latency.json"))
+check_validity(scenario.validity, current_system)
+tools = build_replay_tools(scenario.situation)
+```
+
+If checkout no longer uses `checkout-db-pool-v1`, or if the review date passes, the
+check raises `ExpiredCase`. That is neither an agent pass nor an agent fail: the case
+needs review or replacement. A missing manifest value also expires it. A hard-coded
+manifest like this example is only a teaching aid; it cannot prove that today's
+production topology matches the recording.
+
 ### Step 1: keep the agent unchanged
 
 The Chapter 5 folder copies `agent.py` from Chapter 1 without changing its loop. The
@@ -92,6 +114,13 @@ run. Failing clearly is safer.
 returned the stored dictionary itself, one run could change what the next run sees.
 A fresh copy keeps replay repeatable.
 
+The chapter code also recognizes a recorded response such as
+`{"service": "checkout-service", "raises": "TimeoutError", "message": "logs unavailable"}`
+and raises that error on the call. The example records one outcome per tool. An agent
+that retries a tool, pages through results, or calls it with different arguments needs
+a sequence of recorded calls and matching arguments; this tiny adapter does not
+simulate those cases yet.
+
 ### Step 3: preserve the response shape
 
 The live and replay tools do not need the same implementation. They do need the same
@@ -127,18 +156,18 @@ recording, not a weak agent.
 
 ### Step 4: wire the recorded run
 
-Load the scenario, build the replay tools from its situation, then inject them:
+After the validity check, build the replay tools from the situation and inject them:
 
 ```python
-scenario = load_scenario(Path("scenarios/checkout-latency.json"))
 tools = build_replay_tools(scenario.situation)
 agent = Agent(tools=tools, call_model=scripted_model)
 conclusion = agent.run(scenario.situation.alert)
 ```
 
-The scripted model follows a clear path: metrics, deploys, database status, then a
-conclusion. It stands in for a real model so this example stays deterministic and
-needs no API key. The replay method works the same with an LLM.
+The scripted stand-in reads metrics, logs, deploys, and database status. It sees the
+later payment-provider signal but bases its conclusion on the deploy change and
+queued requests. This example stays deterministic and needs no API key. Replay also
+works with an LLM, though a sampled model may vary between runs.
 
 Run it:
 
@@ -149,10 +178,10 @@ python run_replay.py
 
 ```text
 Scenario:   checkout-latency-after-pool-change
-Root cause: 14:02 deploy cut DB_MAX_CONNECTIONS 50->5, exhausting the pool
+Root cause: Deploy changed DB_MAX_CONNECTIONS 50 -> 5; 40 requests wait for the pool
 Category:   deploy
 Evidence:   get_deploys, get_db_status
-Steps:      4
+Steps:      5
 ```
 
 We have not graded this conclusion. The important result is that the unchanged agent
@@ -170,14 +199,14 @@ removes the largest source of noise.
 
 ### When replay silently lies
 
-A team once records only successful tool calls because failures look like test noise.
+Suppose a team records only successful tool calls because failures look like test noise.
 The evaluation agent learns that every query works on the first try. In production,
 the log backend times out, and the agent has no useful recovery path.
 
-Recorded failures are part of the situation too. If a case depends on a timeout, an
-empty result, or a permission error, store that outcome and make the replay tool raise
-or return it in the same way as the live tool. A clean recording of a messy incident
-is not a faithful recording.
+Recorded failures are part of the situation too. If a case depends on a timeout or
+permission error, save it using `raises`; empty results can be saved as the returned
+dictionary. Do not claim this single-response adapter tests retry behavior. A clean
+recording of a messy incident is not a faithful recording.
 
 ### Where else this applies
 
@@ -200,6 +229,8 @@ The agent should not know which column it is using.
 - Return copies of recorded data so one run cannot change another.
 - Replay freezes the environment, which makes runs comparable even if the model can
   still vary.
+- A preflight rejects stale assumptions before the run; repeatability alone cannot
+    tell whether the test still represents the current system.
 
 Next: stop passing the complete scenario through the run and make it impossible for
 the agent to see the answer key.

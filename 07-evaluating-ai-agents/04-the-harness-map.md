@@ -27,39 +27,46 @@ others.
 
 **1. The scenario — a recorded case.** One file holding two parts: the *situation*
 (the alert, and what each tool returns) and the *answer key* (the true cause, the
-evidence that proves it, the planted distraction, the step budget). This is the unit
-you collect. Ten scenarios is a benchmark; one is a test. *Chapter 4.*
+evidence that proves it, the planted distraction, the step budget). It also records
+the system assumptions and review date that tell us when it expires. Ten valid
+scenarios can form a benchmark; ten stale ones cannot. *Chapter 4.*
 
 **2. Replay — feeding the case to the agent.** Tools that behave exactly like the
 agent's real ones but serve recorded data. The agent isn't modified; it investigates a
 frozen scene without noticing. This is what makes a score mean something: freeze the
-world, and a score that moves means the agent moved. *Chapter 5.*
+world, then check the case still describes the current system before running it.
+Only a score on the same valid cases isolates a change in the agent. *Chapter 5.*
 
 **3. Isolation — the wall.** The answer key must never reach the agent. Sounds
 obvious; it's the easiest thing in the whole design to break by accident, and when it
 breaks your scores stay high while your agent gets worse. Chapter 6 makes the wall
 part of the code, so it doesn't depend on you remembering. *Chapter 6.*
 
-**4. Hard gates — the deterministic score.** The four checks from Chapter 2, in code:
-right category, cited the required evidence, rejected the distraction, stayed inside
-the step budget. Each one passes or fails with no room for argument. *Chapter 7.*
+**4. Hard gates — the deterministic score.** Chapter 2's category check is only a
+start. Chapter 7 adds a structured cause, derives consulted tools from recorded
+actions and returned observations, checks the agent's citations, distinguishes unseen
+from rejected distractions, and enforces the step budget. *Chapter 7.*
 
-**5. The LLM judge — the judgment calls.** Some things the gates can't check. "The
-category was right but the explanation was nonsense" needs a reader. A language model
-grades against a plain-language rubric — and never gets to decide pass or fail on its
-own, for reasons Chapter 8 goes into. *Chapter 8.*
+**5. Jev — the explanation judge.** A correct structured answer can still hide an
+unsupported or contradictory paragraph. Jev evaluates that prose against two typed
+questions after the agent commits. Its judgment is required for a completed grade,
+but cannot override a failed hard gate. An unavailable judge leaves the run
+incomplete rather than green. *Chapter 8.*
 
 ### How one run flows
 
 Put together, evaluating an agent once looks like this:
 
-1. Load a scenario from disk.
-2. Split it — the situation goes forward, the answer key is set aside.
+1. Load the case metadata and check its review date and assumptions against the
+  current system. If it is expired, stop without an agent score.
+2. Split a valid case — the situation goes forward, the answer key is set aside.
 3. Build replay tools from the situation.
 4. Run the agent. It calls tools, reasons, and commits to a conclusion, recording the
    path it took.
 5. Hand the conclusion *and* the answer key to the grader.
-6. Get back a pass or fail per gate, plus the judge's remarks.
+6. Check the hard gates and send a small grader-only state to Jev.
+7. Get back gate results and a typed Jev judgment; combine them without letting
+  either one erase a failure in the other.
 
 Notice where the answer key travels: from the file, around the agent, to the grader.
 It never touches step 4. That detour is the shape of the whole design, and it's why
@@ -70,15 +77,14 @@ the scenario is stored in two parts rather than one blob.
 Three more parts turn a single graded run into something that changes how you
 work:
 
-- **A benchmark** — run every scenario, roll the results into one number, and track it
-  over releases. This is what finally answers the Tuesday question: last week 8 of 10,
-  today 9. *Chapter 9.*
-- **A feedback loop** — every time the agent misses in production, that becomes a new
-  scenario. Your benchmark grows along real weaknesses rather than the ones you
-  imagined. *Chapter 10.*
-- **A CI gate** — run the benchmark on every pull request and block a change that
-  drops the score. This is the point where evaluation stops being a thing you remember
-  to do. *Chapter 11.*
+- **A benchmark** — score active cases, report expired and historical cases outside
+  that score, and compare the same set across releases. A change from 8 of 10 to 9
+  of 10 is meaningful only if the ten cases stayed comparable. *Chapter 9.*
+- **A feedback loop** — turn production misses into reviewed scenarios, and replace
+  or retire cases whose assumptions stop holding. *Chapter 10.*
+- **A CI gate** — block both agent regressions and an unhealthy suite with stale or
+  missing coverage. A case that expires cannot quietly disappear from the denominator
+  and leave a green build. *Chapter 11.*
 
 ### What this is not
 
@@ -120,7 +126,7 @@ from Chapter 2 fails the way it always should have.
 - The harness is five parts: a recorded **scenario**, **replay**, **isolation**,
   **hard gates**, and an **LLM judge**.
 - One run: load the scenario, send the situation to the agent, route the answer key
-  around it to the grader, compare.
+  around it to the grader, compare only after a validity preflight.
 - Operating it adds three more: a **benchmark** to track, a **loop** that turns misses
   into new cases, and a **CI gate** that makes it automatic.
 - It isn't training, it isn't production monitoring, and it isn't a framework you

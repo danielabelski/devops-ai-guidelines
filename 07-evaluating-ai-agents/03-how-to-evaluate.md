@@ -78,7 +78,7 @@ There are at least five things you could mean by "good":
 | Quality | Does it get the right answer, for the right reasons? | yes — this is the whole focus |
 | Cost | How many tokens, tool calls, dollars per run? | partly — via the step budget |
 | Latency | How long does a run take? | no |
-| Safety | Can it do damage? Does it refuse what it should? | no — our agent is read-only by design |
+| Safety | Can it expose data, overload a tool, or follow hostile tool output? | no — our agent is read-only, but that does not make it safe |
 | Consistency | Same input, same answer, run to run? | touched on in Chapter 9 |
 
 Pick deliberately, and write it down. A harness that quietly tries to measure
@@ -189,7 +189,8 @@ cover it, and every one of them is a thing a human reviewer would ask:
 - **Right cause** — did the answer match the truth? *(outcome)*
 - **Right evidence** — did it consult the signals that actually prove the cause?
   *(process)*
-- **Rejected the distraction** — did it ignore the planted red herring? *(process)*
+- **Handled the distraction** — did it encounter the planted red herring and avoid
+  blaming it? Never seeing it is a different result. *(process)*
 - **Step count** — did it get there without thrashing? *(process)*
 
 One outcome check and three process checks. That ratio is the point of this chapter.
@@ -222,8 +223,8 @@ fill in that row for your agent.
   and grade one task at a time.
 - The smallest useful grader is a known answer plus a comparison. It's enough to
   separate a careful agent from a hasty one — and not enough to catch a guess.
-- A complete grade is four checks: right cause, right evidence, rejected the
-  distraction, sensible effort. One outcome, three process.
+- A complete grade checks the cause, actual tool calls, how the agent handled a
+  distraction it saw, and effort. An unseen distraction cannot count as rejected.
 
 Next: the map. Before we build any of this, one page showing all five parts of the
 harness and which chapter builds each.

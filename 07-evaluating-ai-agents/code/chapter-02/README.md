@@ -25,5 +25,5 @@ python grade_once.py
 ```
 
 The lucky agent passing is deliberate. A category-only grade can't tell a
-diagnosis from a guess — that hole is what Chapter 6 closes by grading the
+diagnosis from a guess — that hole is what Chapter 7 closes by grading the
 evidence and the trajectory too.

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="530" viewBox="0 0 760 530" role="img" aria-label="One Jev request shares sanitized expected cause, agent explanation, and recorded observations with two separate questions, a three level explanation quality Score and a yes or no unsupported claim Noul, which return different typed answers rather than one combined number">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000000"/>
+    </marker>
+    <style>
+      .name { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#12222F; }
+      .zone { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; fill:#5B6B78; letter-spacing:1.5px; }
+      .detail { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:400; fill:#5B6B78; }
+      .code { font-family:SFMono-Regular,Menlo,Consolas,monospace; font-weight:400; fill:#12222F; }
+    </style>
+  </defs>
+
+  <rect width="760" height="530" fill="#FFFFFF"/>
+  <text x="380" y="35" text-anchor="middle" class="name" font-size="23">One request, two distinct answers</text>
+
+  <rect x="25" y="60" width="710" height="295" rx="12" fill="#F2F5F8" stroke="#000000" stroke-width="2"/>
+  <text x="380" y="88" text-anchor="middle" class="zone" font-size="12">ONE JEV REQUEST</text>
+
+  <rect x="210" y="105" width="340" height="87" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <text x="380" y="134" text-anchor="middle" class="name" font-size="18">Shared sanitized state</text>
+  <text x="380" y="158" text-anchor="middle" class="detail" font-size="13">Expected cause, agent explanation</text>
+  <text x="380" y="177" text-anchor="middle" class="detail" font-size="13">Recorded observations</text>
+
+  <rect x="51" y="250" width="298" height="82" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <text x="200" y="280" text-anchor="middle" class="name" font-size="18">Explanation quality</text>
+  <text x="200" y="308" text-anchor="middle" class="detail" font-size="13">Score question: levels 0, 1, 2</text>
+
+  <rect x="411" y="250" width="298" height="82" rx="12" fill="#BACFE3" stroke="#000000" stroke-width="2"/>
+  <text x="560" y="280" text-anchor="middle" class="name" font-size="18">Unsupported claim</text>
+  <text x="560" y="308" text-anchor="middle" class="detail" font-size="13">Noul question: yes or no</text>
+
+  <text x="380" y="382" text-anchor="middle" class="zone" font-size="12">SEPARATE TYPED ANSWERS</text>
+
+  <rect x="51" y="416" width="298" height="88" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <text x="200" y="448" text-anchor="middle" class="name" font-size="18">Score: 0 to 2</text>
+  <text x="200" y="478" text-anchor="middle" class="detail" font-size="13">Quality across three levels</text>
+
+  <rect x="411" y="416" width="298" height="88" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+  <text x="560" y="448" text-anchor="middle" class="name" font-size="18">Noul: 0 to 1</text>
+  <text x="560" y="478" text-anchor="middle" class="detail" font-size="13">Near 1 means unsupported claim</text>
+
+  <path d="M380,193 V216 H200 V245" stroke="#000000" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <path d="M380,216 H560 V245" stroke="#000000" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <path d="M200,333 V411" stroke="#000000" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <path d="M560,333 V411" stroke="#000000" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+</svg>

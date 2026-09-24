@@ -1,0 +1,7 @@
+{
+  "id": "checkout-latency-01",
+  "case": "pool",
+  "change": "Baseline: one vague instruction",
+  "instructions": "Find out why checkout is slow. Call submit_diagnosis when you are done.",
+  "max_steps": 5
+}

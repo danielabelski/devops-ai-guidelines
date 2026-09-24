@@ -1,7 +1,7 @@
 """grade.py — score a Conclusion against an AnswerKey.
 
 The first, smallest grade: does the agent's category match the truth? Not enough
-on its own — Chapter 6 adds evidence, the distraction, and step count — but it is
+on its own — Chapter 7 adds evidence, the distraction, and step count — but it is
 the first time "was it right?" has an answer instead of a shrug.
 """
 
